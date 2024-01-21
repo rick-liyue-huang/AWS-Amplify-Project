@@ -1,31 +1,48 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { Auth } from 'aws-amplify';
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-export const SiteNav = (props) => {
-  const handleLogout = () => {
-    props.logOut();
+export function SiteNav(props) {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      console.log('Logout');
+      // await Auth.signOut();
+
+      props.updateAuthStatus(false);
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar bg='dark' expand='lg' variant='dark'>
         <Container>
-          <Navbar.Brand href='/'>My App</Navbar.Brand>
+          <Navbar.Brand>
+            <Nav.Link href='/'>Contacts App</Nav.Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav>
-              <Nav.Link href='/'>Home</Nav.Link>
-              <Nav.Link href='/about'>About</Nav.Link>
-              <Nav.Link href='/contact'>Contact</Nav.Link>
-              {/* <Nav.Link href='/login'>Login</Nav.Link>
-              <Nav.Link href='/register'>Register</Nav.Link> */}
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            </Nav>
+            {props.isAuthenticated !== false && (
+              <Nav className='ms-md-auto'>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              </Nav>
+            )}
+            {props.isAuthenticated === false && (
+              <Nav className='ms-md-auto'>
+                <Nav.Link href='/login'>Login</Nav.Link>
+                <Nav.Link href='/register'>Register</Nav.Link>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </header>
   );
-};
+}
