@@ -6,5 +6,9 @@ THE PROJECT BY AWS AMPLIFY
 `sudo amplify status`
 `sudo amplify push`
 `npm i @aws-amplify/ui-react  aws-amplify`
+`sudo amplify add storage`
+`sudo amplify add api`
+`sudo amplify push`
+`sudo amilify delete` to delete the amplify project locally and remotely
 
 'https://ui.docs.amplify.aws/react/getting-started/installation'
