@@ -12,3 +12,6 @@ THE PROJECT BY AWS AMPLIFY
 `sudo amilify delete` to delete the amplify project locally and remotely
 
 'https://ui.docs.amplify.aws/react/getting-started/installation'
+
+GraphQL endpoint: https://2yn6mew7wbds5cpgvajn44333y.appsync-api.ap-southeast-2.amazonaws.com/graphql
+GraphQL API KEY: da2-qyghil62xzfdbeyjr6e3vr7c3q

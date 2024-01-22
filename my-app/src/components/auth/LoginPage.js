@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 // import { Auth } from 'aws-amplify';
+import { signIn } from 'aws-amplify/auth';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -22,14 +23,16 @@ export function LoginPage(props) {
       console.log(password);
 
       // await Auth.signIn(username, password);
+      await signIn({ username, password });
+      console.log('Login - after signIn');
+      console.log(props.isAuthenticated);
 
-      // props.updateAuthStatus(true);
+      props.updateAuthStatus(true);
       navigate('/contacts');
     } catch (err) {
       console.log(err);
     }
   };
-
   return (
     <Container>
       <Row className='px-4 my-5'>

@@ -9,7 +9,7 @@ import { uploadData, getUrl } from 'aws-amplify/storage';
 import { createContact } from '../../graphql/mutations';
 import { listContacts } from '../../graphql/queries';
 
-export const ContactPage = () => {
+export const ContactPage = (props) => {
   const client = generateClient();
   const [contactData, setContactData] = React.useState({
     name: '',

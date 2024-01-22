@@ -10,6 +10,17 @@
       "StackName": "amplify-myapp-dev-100303",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:173830242960:stack/amplify-myapp-dev-100303/3bbbce30-b8b1-11ee-8946-0281a97ba74f",
       "AmplifyAppId": "dvk2up4eap3lq"
+    },
+    "categories": {
+      "auth": {
+        "myappec02001c": {}
+      },
+      "storage": {
+        "contactstorage": {}
+      },
+      "api": {
+        "contactgraphqlapi": {}
+      }
     }
   }
 }

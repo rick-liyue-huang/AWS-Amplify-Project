@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 // import { Auth } from 'aws-amplify';
+import { confirmSignUp } from 'aws-amplify/auth';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export function ValidatePage() {
+export function ValidatePage(props) {
   const navigate = useNavigate();
 
   const [username, setUserName] = useState('');
@@ -21,7 +22,16 @@ export function ValidatePage() {
       console.log(username);
       console.log(authenticationCode);
 
-      // await Auth.confirmSignUp(username, authenticationCode);
+      await confirmSignUp({
+        username: username,
+        confirmationCode: authenticationCode,
+      });
+      // props.updateAuthStatus(true);
+      console.log(
+        'handleRegisterConfirmation isAuthenticated: ',
+        props.isAuthenticated
+      );
+      console.log('handleRegisterConfirmation - after confirmSignUp');
       navigate('/login');
     } catch (err) {
       console.log(err);
@@ -43,6 +53,7 @@ export function ValidatePage() {
               <Form.Control
                 type='text'
                 placeholder='Enter User Name'
+                value={username}
                 onChange={(evt) => setUserName(evt.target.value)}
               />
             </Form.Group>
@@ -51,6 +62,7 @@ export function ValidatePage() {
               <Form.Control
                 type='text'
                 placeholder='Enter Authentication Code'
+                value={authenticationCode}
                 onChange={(evt) => setAuthenticationCode(evt.target.value)}
               />
             </Form.Group>

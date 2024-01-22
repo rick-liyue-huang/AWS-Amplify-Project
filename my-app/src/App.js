@@ -18,6 +18,7 @@ Amplify.configure(awsExports);
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  console.log('isAuthenticated: ', isAuthenticated);
 
   function updateAuthStatus(authStatus) {
     setIsAuthenticated(authStatus);
@@ -41,10 +42,23 @@ function App() {
         />
         <Route
           path='/login'
-          element={<LoginPage updateAuthStatus={updateAuthStatus} />}
+          element={
+            <LoginPage
+              updateAuthStatus={updateAuthStatus}
+              isAuthenticated={isAuthenticated}
+            />
+          }
         />
-        <Route path='/register' element={<RegisterPage />} />
-        <Route path='/validate' element={<ValidatePage />} />
+        <Route
+          path='/register'
+          element={<RegisterPage isAuthenticated={isAuthenticated} />}
+        />
+        <Route
+          path='/validate'
+          element={<ValidatePage />}
+          isAuthenticated={isAuthenticated}
+          updateAuthStatus={updateAuthStatus}
+        />
         <Route
           path='/contacts'
           element={<ContactPage isAuthenticated={isAuthenticated} />}

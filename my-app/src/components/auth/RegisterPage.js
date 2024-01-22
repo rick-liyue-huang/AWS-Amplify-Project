@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { signUp } from 'aws-amplify/auth';
 
 // import { Auth } from 'aws-amplify';
 
@@ -9,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export function RegisterPage() {
+export function RegisterPage(props) {
   const navigate = useNavigate();
 
   const [username, setUserName] = useState('');
@@ -22,13 +23,19 @@ export function RegisterPage() {
       console.log(password);
       console.log(email);
 
-      // const { user } = await Auth.signUp({
-      //     username: username,
-      //     password: password,
-      //     attributes: {
-      //         email: email,
-      //     }
-      // });
+      const user = await signUp({
+        username: username,
+        password: password,
+        options: {
+          userAttributes: {
+            email: email,
+          },
+        },
+      });
+
+      console.log('isAuthenticated - register: ', props.isAuthenticated);
+      console.log('user: ', user);
+      // { isSignUpComplete, userId, nextStep } = user;
 
       navigate('/validate');
     } catch (err) {

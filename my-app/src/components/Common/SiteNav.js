@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 // import { Auth } from 'aws-amplify';
+import { signOut } from 'aws-amplify/auth';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -11,7 +12,7 @@ export function SiteNav(props) {
   const handleLogout = async () => {
     try {
       console.log('Logout');
-      // await Auth.signOut();
+      await signOut();
 
       props.updateAuthStatus(false);
       navigate('/');
